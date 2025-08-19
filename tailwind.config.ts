@@ -123,7 +123,13 @@ export default {
 			},
 			boxShadow: {
 				'soft': 'var(--shadow-soft)',
-				'medium': 'var(--shadow-medium)'
+				'medium': 'var(--shadow-medium)',
+				'glow': 'var(--shadow-glow)'
+			},
+			backgroundImage: {
+				'gradient-social': 'var(--gradient-social)',
+				'gradient-dark': 'var(--gradient-dark)',
+				'gradient-card': 'var(--gradient-card)'
 			}
 		}
 	},

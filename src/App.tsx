@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "@/contexts/UserContext";
 import { TimeTrackingProvider } from "@/contexts/TimeTrackingContext";
+import Login from "./pages/Login";
 import Index from "./pages/Index";
 import Feed from "./pages/Feed";
 import Communities from "./pages/Communities";
@@ -25,6 +26,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/feed" element={<Feed />} />
               <Route path="/communities" element={<Communities />} />
               <Route path="/profile" element={<Profile />} />

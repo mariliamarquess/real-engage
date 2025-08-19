@@ -8,50 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Calm, mindful color palette */
-    --background: 210 20% 98%;
-    --foreground: 216 12% 20%;
+    /* Modern social media inspired palette */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 216 12% 20%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 216 12% 20%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Subtle, non-stimulating primary */
-    --primary: 200 20% 45%;
-    --primary-foreground: 210 20% 98%;
+    /* Vibrant primary - Purple */
+    --primary: 270 100% 70%;
+    --primary-foreground: 0 0% 7%;
 
-    /* Gentle secondary tones */
-    --secondary: 210 15% 92%;
-    --secondary-foreground: 216 12% 35%;
+    /* Secondary - Pink accent */
+    --secondary: 330 100% 75%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 210 15% 94%;
-    --muted-foreground: 216 8% 55%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
 
-    /* Mindful accent colors */
-    --accent: 165 35% 85%;
-    --accent-foreground: 165 35% 25%;
+    /* Yellow accent */
+    --accent: 45 100% 65%;
+    --accent-foreground: 0 0% 7%;
 
-    /* Gentle destructive for warnings */
-    --destructive: 15 65% 65%;
-    --destructive-foreground: 210 20% 98%;
+    /* Destructive - keeping similar */
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 95%;
 
-    /* Calm borders and inputs */
-    --border: 210 15% 88%;
-    --input: 210 15% 90%;
-    --ring: 200 20% 55%;
+    /* Modern borders and inputs */
+    --border: 0 0% 25%;
+    --input: 0 0% 15%;
+    --ring: 270 100% 70%;
 
-    /* Mindful gradients and effects */
-    --gradient-calm: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted)));
-    --gradient-focus: linear-gradient(180deg, hsl(var(--accent)), hsl(var(--accent) / 0.8));
+    /* Social media inspired gradients */
+    --gradient-social: linear-gradient(135deg, hsl(270 100% 70%), hsl(330 100% 75%), hsl(45 100% 65%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 7%), hsl(0 0% 12%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 12%), hsl(0 0% 8%));
     
-    /* Gentle shadows */
-    --shadow-soft: 0 2px 8px hsl(var(--foreground) / 0.04);
-    --shadow-medium: 0 4px 16px hsl(var(--foreground) / 0.08);
+    /* Modern shadows */
+    --shadow-soft: 0 4px 20px hsl(270 100% 70% / 0.1);
+    --shadow-medium: 0 8px 40px hsl(270 100% 70% / 0.15);
+    --shadow-glow: 0 0 30px hsl(270 100% 70% / 0.3);
     
-    /* Smooth, non-jarring transitions */
-    --transition-calm: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Smooth modern transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.75rem;
 
