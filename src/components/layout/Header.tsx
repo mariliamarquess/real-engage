@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Clock, Settings, User, Menu, LogOut } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Clock, Settings, User, Menu, LogOut, Search, Bell, Shield } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "@/contexts/UserContext";
 import { useTimeTracking } from "@/contexts/TimeTrackingContext";
@@ -10,6 +11,7 @@ import {
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 
 export function Header() {
   const location = useLocation();
@@ -24,61 +26,71 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center">
-            <span className="text-sm font-bold text-accent-foreground">R</span>
+      <div className="container flex h-16 items-center justify-between px-4 max-w-7xl">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-accent to-secondary flex items-center justify-center shadow-lg">
+            <span className="text-lg font-bold text-primary-foreground">R</span>
           </div>
-          <div>
-            <h1 className="text-lg font-semibold">Reflectis</h1>
-            <p className="text-xs text-muted-foreground">Rede consciente</p>
+          <div className="hidden sm:block">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Reflectis
+            </h1>
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link to="/feed">
-            <Button 
-              variant={isActive('/feed') ? 'default' : 'ghost'} 
-              size="sm"
-            >
-              Feed
-            </Button>
-          </Link>
-          <Link to="/communities">
-            <Button 
-              variant={isActive('/communities') ? 'default' : 'ghost'} 
-              size="sm"
-            >
-              Comunidades
-            </Button>
-          </Link>
-          <Link to="/about">
-            <Button 
-              variant={isActive('/about') ? 'default' : 'ghost'} 
-              size="sm"
-            >
-              Sobre
-            </Button>
-          </Link>
-        </nav>
+        {/* Search Bar */}
+        <div className="flex-1 max-w-lg mx-6 relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input 
+            placeholder="Buscar reflexões, comunidades..." 
+            className="pl-10 bg-muted/50 border-0 focus-visible:ring-1 focus-visible:ring-primary/50"
+          />
+        </div>
 
-        <div className="flex items-center space-x-3">
+        {/* Right Actions */}
+        <div className="flex items-center space-x-3 flex-shrink-0">
           {user && (
-            <div className="flex items-center space-x-1 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              <span>{minutes}min hoje</span>
-            </div>
+            <>
+              {/* Time Counter with Status */}
+              <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-muted/50">
+                <Clock className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium">{minutes}min</span>
+                <Badge variant={minutes < 20 ? "default" : minutes < 40 ? "secondary" : "destructive"} className="text-xs">
+                  {minutes < 20 ? "Saudável" : minutes < 40 ? "Moderado" : "Limite"}
+                </Badge>
+              </div>
+
+              {/* Well-being Indicator */}
+              <Button variant="ghost" size="sm" className="hidden md:flex items-center space-x-1 text-muted-foreground">
+                <Shield className="h-4 w-4" />
+                <span className="text-xs">Modo consciente</span>
+              </Button>
+
+              {/* Notifications */}
+              <Button variant="ghost" size="sm" className="relative">
+                <Bell className="h-4 w-4" />
+                <span className="absolute -top-1 -right-1 h-3 w-3 bg-accent rounded-full"></span>
+              </Button>
+            </>
           )}
           
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="flex items-center space-x-2">
-                  <User className="h-4 w-4" />
-                  <span className="hidden md:inline">{user.name}</span>
+                <Button variant="ghost" size="sm" className="flex items-center space-x-2 hover:bg-muted/80">
+                  <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <User className="h-4 w-4 text-primary-foreground" />
+                  </div>
+                  <span className="hidden lg:inline font-medium">{user.name}</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuContent align="end" className="w-64">
+                <div className="p-2">
+                  <p className="font-medium">{user.name}</p>
+                  <p className="text-sm text-muted-foreground">@{user.username}</p>
+                </div>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link to="/profile" className="flex items-center space-x-2">
                     <User className="h-4 w-4" />
@@ -99,7 +111,11 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button size="sm">Entrar</Button>
+            <Link to="/login">
+              <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90">
+                Entrar
+              </Button>
+            </Link>
           )}
         </div>
       </div>
